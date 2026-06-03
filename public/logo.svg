@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60">
+  <defs>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16a34a;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Icono moderno de transporte/auto minimalista -->
+  <g transform="translate(5, 12)">
+    <!-- Cuerpo del auto estilizado -->
+    <path d="M 5 25 Q 5 15 15 15 L 35 15 Q 45 15 45 25 L 45 30 Q 45 35 40 35 L 5 35 Q 0 35 0 30 Z" 
+          fill="url(#greenGrad)" filter="url(#shadow)"/>
+    <!-- Techo/cabina -->
+    <path d="M 15 15 Q 20 8 30 8 L 35 8 Q 40 8 40 15 L 35 15 L 15 15 Z" 
+          fill="#4ade80" opacity="0.9"/>
+    <!-- Llantas modernas -->
+    <circle cx="12" cy="35" r="5" fill="#1a1a1a" filter="url(#shadow)"/>
+    <circle cx="12" cy="35" r="2.5" fill="#666"/>
+    <circle cx="38" cy="35" r="5" fill="#1a1a1a" filter="url(#shadow)"/>
+    <circle cx="38" cy="35" r="2.5" fill="#666"/>
+    <!-- Linea de luz (indicador de movimiento) -->
+    <path d="M 45 20 L 52 20" stroke="#4ade80" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+    <path d="M 45 25 L 50 25" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  </g>
+  
+  <!-- Texto PapiGo con tipografía moderna -->
+  <text x="65" y="30" 
+        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" 
+        font-size="28" 
+        font-weight="700" 
+        fill="#16a34a">
+    Papi
+  </text>
+  <text x="135" y="30" 
+        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" 
+        font-size="28" 
+        font-weight="700" 
+        fill="#22c55e">
+    Go
+  </text>
+  
+  <!-- Elemento decorativo: punto o indicador de "mi" -->
+  <circle cx="195" cy="20" r="3" fill="#22c55e" opacity="0.6"/>
+  
+  <!-- Linea sutil bajo el texto -->
+  <rect x="65" y="35" width="130" height="2" fill="url(#greenGrad)" opacity="0.3" rx="1"/>
+</svg>

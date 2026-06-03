@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60" width="200" height="60">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#333333;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Icono de auto estilizado -->
+  <rect x="10" y="25" width="30" height="15" rx="3" fill="url(#gradient)" />
+  <circle cx="18" cy="42" r="4" fill="#000" />
+  <circle cx="32" cy="42" r="4" fill="#000" />
+  <rect x="14" y="22" width="22" height="5" rx="2" fill="#666" />
+  
+  <!-- Texto ViajeSeguro -->
+  <text x="50" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#000000">Viaje</text>
+  <text x="105" y="35" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#10b981">Seguro</text>
+  
+  <!-- Subrayado decorativo -->
+  <rect x="50" y="38" width="100" height="2" fill="#10b981" opacity="0.3" />
+</svg>

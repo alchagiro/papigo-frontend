@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80" width="300" height="80">
+  <defs>
+    <linearGradient id="greenGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#16a34a;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow2">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Icono de auto moderno y elegante -->
+  <g transform="translate(5, 15)">
+    <!-- Cuerpo principal -->
+    <path d="M 5 30 Q 5 18 18 18 L 42 18 Q 55 18 55 30 L 55 36 Q 55 42 48 42 L 5 42 Q 0 42 0 36 Z" 
+          fill="url(#greenGrad2)" filter="url(#shadow2)"/>
+    <!-- Cabina/Techo -->
+    <path d="M 18 18 Q 25 8 38 8 L 45 8 Q 52 8 52 18 L 45 18 L 18 18 Z" 
+          fill="#4ade80" opacity="0.95"/>
+    <!-- Ventanas -->
+    <rect x="22" y="12" width="8" height="6" rx="1" fill="white" opacity="0.8"/>
+    <rect x="32" y="12" width="8" height="6" rx="1" fill="white" opacity="0.8"/>
+    <!-- Llantas modernas con detalles -->
+    <circle cx="15" cy="42" r="6" fill="#1a1a1a" filter="url(#shadow2)"/>
+    <circle cx="15" cy="42" r="3" fill="#555"/>
+    <circle cx="15" cy="42" r="1.5" fill="#888"/>
+    <circle cx="45" cy="42" r="6" fill="#1a1a1a" filter="url(#shadow2)"/>
+    <circle cx="45" cy="42" r="3" fill="#555"/>
+    <circle cx="45" cy="42" r="1.5" fill="#888"/>
+    <!-- Luz delantera -->
+    <circle cx="56" cy="28" r="2" fill="#4ade80" opacity="0.9"/>
+    <line x1="56" y1="25" x2="62" y2="25" stroke="#4ade80" stroke-width="1.5" opacity="0.6"/>
+  </g>
+  
+  <!-- Texto PapiGo con diseño moderno -->
+  <text x="75" y="38" 
+        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" 
+        font-size="36" 
+        font-weight="800" 
+        fill="#16a34a"
+        letter-spacing="-1">
+    Papi
+  </text>
+  <text x="155" y="38" 
+        font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" 
+        font-size="36" 
+        font-weight="800" 
+        fill="#22c55e"
+        letter-spacing="-1">
+    Go
+  </text>
+  
+  <!-- Elemento decorativo: arco indicador -->
+  <path d="M 75 42 Q 150 50 240 42" 
+        stroke="url(#greenGrad2)" 
+        stroke-width="2" 
+        fill="none" 
+        opacity="0.4"/>
+  
+  <!-- Pequeño indicador de movimiento -->
+  <circle cx="250" cy="20" r="2" fill="#22c55e" opacity="0.6"/>
+  <circle cx="255" cy="18" r="1.5" fill="#4ade80" opacity="0.4"/>
+</svg>
