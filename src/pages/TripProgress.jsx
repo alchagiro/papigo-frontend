@@ -154,7 +154,10 @@ const TripProgress = () => {
       });
       sendTripStatusUpdate({ tripId, status: "completed" });
       await getTripDetails(tripId);
-    } catch (err) { console.error("Error al completar viaje"); }
+    } catch (err) {
+      console.error("Error al completar viaje:", err.response?.data?.error || err.message);
+      alert("Error al completar viaje: " + (err.response?.data?.error || err.message));
+    }
     finally { setLoading(false); }
   };
 

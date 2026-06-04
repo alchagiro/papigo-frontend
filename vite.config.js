@@ -14,8 +14,5 @@ export default defineConfig({
       },
     },
   },
-  define: {
-    "import.meta.env.VITE_API_URL": JSON.stringify(process.env.VITE_API_URL || "http://localhost:3001/api"),
-    "import.meta.env.VITE_SOCKET_URL": JSON.stringify(process.env.VITE_SOCKET_URL || "http://localhost:3001"),
-  },
+
 });
