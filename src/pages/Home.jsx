@@ -60,8 +60,7 @@ const Home = () => {
           vehicleType
         }
       });
-      setDistanceInfo((prev) => ({ ...prev, fare: result.data.fare }));
-      setDistanceInfo((prev) => ({ ...prev, fare: result.fare }));
+      setDistanceInfo({ distance: result.data.distance, duration: result.data.duration, fare: result.data.fare });
     } catch (err) {
       setError("Error al calcular la tarifa");
     }
