@@ -201,13 +201,9 @@ const AdminPanel = () => {
       <header className="header">
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <img 
-            src="/logo-large.svg" 
+            src="/LogoV.png" 
             alt={appConfig.name} 
             style={{ height: "45px", width: "auto" }}
-            onError={(e) => { 
-              e.target.onerror = null; 
-              e.target.src = "/logo.svg"; 
-            }}
           />
         </div>
         <div className="header-actions">
