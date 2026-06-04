@@ -159,8 +159,6 @@ const DriverHome = () => {
           <img src="/LogoV.png" alt="PapiGo" style={{ height: "36px", width: "auto" }} />
           <h1 style={{ fontSize: "22px", fontWeight: "800" }}>Conductor</h1>
         </div>
-          <h1 style={{ fontSize: "22px", fontWeight: "800" }}>Conductor</h1>
-        </div>
         <div className="header-actions">
           <span style={{ fontWeight: "600" }}>Hola, {user?.name}</span>
           {ratingInfo && (
