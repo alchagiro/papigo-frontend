@@ -116,7 +116,10 @@ const AdminPanel = () => {
       await api.post(`/admin/users/${action}`, { userId, reason });
       if (activeTab === "passengers") fetchPassengers();
       else if (activeTab === "drivers") fetchDrivers();
-    } catch (err) { console.error("Error en accion de usuario"); }
+    } catch (err) {
+      console.error("Error en accion de usuario:", err.response?.data?.error || err.message);
+      alert("Error: " + (err.response?.data?.error || err.message));
+    }
   };
 
   const handleGiveBonus = async () => {
