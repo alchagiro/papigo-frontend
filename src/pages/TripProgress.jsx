@@ -263,7 +263,10 @@ const TripProgress = () => {
   return (
     <div>
       <header className="header">
-        <h1>Viaje</h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <img src="/LogoV.png" alt="PapiGo" style={{ height: "36px", width: "auto" }} />
+          <h1>Viaje</h1>
+        </div>
         <div className="header-actions">
           {isActiveTrip && user?.role === "passenger" && (
             <button

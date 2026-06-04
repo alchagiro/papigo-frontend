@@ -71,7 +71,10 @@ const AdminUserTrips = () => {
   return (
     <div>
       <header className="header">
-        <h1>Historial de Viajes</h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <img src="/LogoV.png" alt="PapiGo" style={{ height: "36px", width: "auto" }} />
+          <h1>Historial de Viajes</h1>
+        </div>
         <div className="header-actions">
           <button className="btn btn-secondary" onClick={() => navigate("/")}>
             Volver al Panel

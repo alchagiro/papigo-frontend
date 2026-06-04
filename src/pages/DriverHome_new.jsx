@@ -109,7 +109,10 @@ const DriverHome = () => {
   return (
     <div>
       <header className="header">
-        <h1>Modo Conductor</h1>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <img src="/LogoV.png" alt="PapiGo" style={{ height: "36px", width: "auto" }} />
+          <h1>Modo Conductor</h1>
+        </div>
         <div className="header-actions">
           <span>{user?.name}</span>
           <button className={`btn ${isActive ? "btn-danger" : "btn-success"}`} onClick={handleToggleActive}>

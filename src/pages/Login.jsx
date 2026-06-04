@@ -40,22 +40,7 @@ const Login = () => {
     <div className="auth-container">
       <div className="auth-box">
         <div style={{ textAlign: "center", marginBottom: "32px" }}>
-          <div style={{
-            width: "80px",
-            height: "80px",
-            borderRadius: "20px",
-            background: "linear-gradient(135deg, #00ab67 0%, #000000 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "0 auto 16px",
-            boxShadow: "0 8px 24px rgba(0, 171, 103, 0.4)",
-            animation: "float 3s ease-in-out infinite"
-          }}>
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-              <path d="M5 17h14M5 17c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v6c0 1.1-.9 2-2 2M5 17c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2M19 17c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2-2M7 9l2-3h6l2 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
+          <img src="/LogoV.png" alt="PapiGo" style={{ width: "80px", height: "80px", objectFit: "contain", margin: "0 auto 16px", display: "block" }} />
           <h1>{appConfig.name}</h1>
           <p className="subtitle">{appConfig.slogan}</p>
         </div>

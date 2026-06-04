@@ -156,20 +156,9 @@ const DriverHome = () => {
     <div>
       <header className="header">
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div style={{
-            width: "36px",
-            height: "36px",
-            borderRadius: "8px",
-            background: "linear-gradient(135deg, #00ab67 0%, #000000 100%)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            boxShadow: "0 4px 12px rgba(0, 171, 103, 0.3)"
-          }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="M5 17h14M5 17c-1.1 0-2-.9-2-2V9c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2v6c0 1.1-.9 2-2 2M5 17c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2-2M19 17c0 1.1.9 2 2 2s2-.9 2-2-.9-2-2-2-2-2-2M7 9l2-3h6l2 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
+          <img src="/LogoV.png" alt="PapiGo" style={{ height: "36px", width: "auto" }} />
+          <h1 style={{ fontSize: "22px", fontWeight: "800" }}>Conductor</h1>
+        </div>
           <h1 style={{ fontSize: "22px", fontWeight: "800" }}>Conductor</h1>
         </div>
         <div className="header-actions">
