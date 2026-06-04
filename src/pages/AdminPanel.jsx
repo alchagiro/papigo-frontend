@@ -432,7 +432,7 @@ const AdminPanel = () => {
                         <p style={{ fontSize: "14px", color: "#666" }}>
                           🚗 Vehículo: {u.vehicle_type === 'motorcycle' ? '🏍️ Moto' : '🚗 Carro'}
                         </p>
-                        <p style={{ fontSize: "14px", color: "#666" }}>⭐ Calificación: {u.driver_rating ? u.driver_rating.toFixed(1) : "Sin calificaciones"} ({u.total_ratings || 0} votos)</p>
+                        <p style={{ fontSize: "14px", color: "#666" }}>⭐ Calificación: {u.driver_rating ? Number(u.driver_rating).toFixed(1) : "Sin calificaciones"} ({u.total_ratings || 0} votos)</p>
                         <p style={{ fontSize: "14px", color: "#666" }}>✅ Viajes completados como conductor: {u.completed_trips || 0}</p>
                         <p style={{ fontSize: "14px", color: "#666" }}>📊 Total viajes como conductor: {u.total_trips || 0}</p>
                         {u.last_active && (
