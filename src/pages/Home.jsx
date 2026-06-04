@@ -52,27 +52,16 @@ const Home = () => {
 
     try {
       setError("");
-      if (distanceInfo) {
-        let perKm;
-        const outsideCities = ["palmira", "yumbo", "jamundi", "candelaria"];
-        const intercitySurcharge = 20000;
-        
-        if (vehicleType === 'motorcycle') {
-          perKm = 700;
-        } else {
-          perKm = 1250;
+      const result = await api.get("/trips/calculate-fare", {
+        params: {
+          pickupLat: pickupLocation.lat, pickupLng: pickupLocation.lng,
+          dropoffLat: dropoffLocation.lat, dropoffLng: dropoffLocation.lng,
+          pickupAddress, dropoffAddress,
+          vehicleType
         }
-        
-        const calculatedFare = distanceInfo.distance * perKm;
-        let fare = Math.round(calculatedFare);
-
-        if (outsideCities.some(c => dropoffAddress?.toLowerCase().includes(c)) ||
-            outsideCities.some(c => pickupAddress?.toLowerCase().includes(c))) {
-          fare += intercitySurcharge;
-        }
-
-        setDistanceInfo((prev) => ({ ...prev, fare }));
-      }
+      });
+      setDistanceInfo((prev) => ({ ...prev, fare: result.data.fare }));
+      setDistanceInfo((prev) => ({ ...prev, fare: result.fare }));
     } catch (err) {
       setError("Error al calcular la tarifa");
     }
