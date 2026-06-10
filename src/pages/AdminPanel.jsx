@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import { api } from "../store/authStore";
 import appConfig from "../config/appConfig";
+import { API_URL } from "../config";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, Legend } from "recharts";
+
+const serverUrl = API_URL.replace('/api', '');
 
 const AdminPanel = () => {
   const { user, logout } = useAuthStore();
@@ -32,6 +35,11 @@ const AdminPanel = () => {
   const [showActivateModal, setShowActivateModal] = useState(false);
   const [driverToActivate, setDriverToActivate] = useState(null);
   const [activationVehicleType, setActivationVehicleType] = useState("car");
+
+  const [showPhotoModal, setShowPhotoModal] = useState(false);
+  const [photoDriver, setPhotoDriver] = useState(null);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [uploadingPhoto, setUploadingPhoto] = useState(false);
 
   const [stats, setStats] = useState(null);
   const [statsLoading, setStatsLoading] = useState(true);
@@ -168,6 +176,27 @@ const AdminPanel = () => {
       alert("Error al crear usuario: " + (err.response?.data?.error || err.message));
     } finally {
       setCreatingUser(false);
+    }
+  };
+
+  const handleUploadPhoto = async () => {
+    if (!selectedPhoto || !photoDriver) return;
+    setUploadingPhoto(true);
+    try {
+      const formData = new FormData();
+      formData.append("photo", selectedPhoto);
+      await api.post(`/admin/drivers/${photoDriver}/photo`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      alert("Foto subida exitosamente");
+      setShowPhotoModal(false);
+      setSelectedPhoto(null);
+      setPhotoDriver(null);
+      fetchDrivers();
+    } catch (err) {
+      alert("Error al subir foto: " + (err.response?.data?.error || err.message));
+    } finally {
+      setUploadingPhoto(false);
     }
   };
 
@@ -420,27 +449,37 @@ const AdminPanel = () => {
                 {drivers.map(u => (
                   <div key={u.id} className="trip-card" style={{ opacity: !u.is_active ? 0.8 : (u.is_suspended ? 0.6 : 1), border: !u.is_active ? "2px solid #f59e0b" : "none" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                      <div>
-                        <h3>{u.name} {!u.is_active && <span style={{ color: "#f59e0b", fontSize: "14px" }}>(PENDIENTE)</span>}</h3>
-                        <p style={{ fontSize: "14px", color: "#666" }}>📧 {u.email}</p>
-                        <p style={{ fontSize: "14px", color: "#666" }}>📱 {u.phone || "No registrado"}</p>
-                        <p style={{ fontSize: "14px", color: "#666" }}>📅 Registro: {u.created_at ? new Date(u.created_at).toLocaleDateString() : "N/A"}</p>
-                        <p style={{ fontSize: "14px", color: "#666" }}>
-                          🚗 Vehículo: {u.vehicle_type === 'motorcycle' ? '🏍️ Moto' : '🚗 Carro'}
-                        </p>
-                        <p style={{ fontSize: "14px", color: "#666" }}>⭐ Calificación: {u.driver_rating ? Number(u.driver_rating).toFixed(1) : "Sin calificaciones"} ({u.total_ratings || 0} votos)</p>
-                        <p style={{ fontSize: "14px", color: "#666" }}>✅ Viajes completados como conductor: {u.completed_trips || 0}</p>
-                        <p style={{ fontSize: "14px", color: "#666" }}>📊 Total viajes como conductor: {u.total_trips || 0}</p>
-                        {u.last_active && (
-                          <p style={{ fontSize: "14px", color: "#666" }}>🕐 Última actividad: {new Date(u.last_active).toLocaleString()}</p>
+                      <div style={{ display: "flex", gap: "16px", flex: 1 }}>
+                        {u.photo_url && (
+                          <img
+                            src={serverUrl + u.photo_url}
+                            alt={u.name}
+                            style={{ width: "64px", height: "64px", borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
+                          />
                         )}
-                        {!u.is_active && <span style={{ color: "#f59e0b", fontWeight: "bold" }}>PENDIENTE DE APROBACIÓN</span>}
-                        {u.is_suspended && <span style={{ color: "#d93025", fontWeight: "bold" }}>SUSPENDIDO</span>}
+                        <div>
+                          <h3>{u.name} {!u.is_active && <span style={{ color: "#f59e0b", fontSize: "14px" }}>(PENDIENTE)</span>}</h3>
+                          <p style={{ fontSize: "14px", color: "#666" }}>📧 {u.email}</p>
+                          <p style={{ fontSize: "14px", color: "#666" }}>📱 {u.phone || "No registrado"}</p>
+                          <p style={{ fontSize: "14px", color: "#666" }}>📅 Registro: {u.created_at ? new Date(u.created_at).toLocaleDateString() : "N/A"}</p>
+                          <p style={{ fontSize: "14px", color: "#666" }}>
+                            🚗 Vehículo: {u.vehicle_type === 'motorcycle' ? '🏍️ Moto' : '🚗 Carro'}
+                          </p>
+                          <p style={{ fontSize: "14px", color: "#666" }}>⭐ Calificación: {u.driver_rating ? Number(u.driver_rating).toFixed(1) : "Sin calificaciones"} ({u.total_ratings || 0} votos)</p>
+                          <p style={{ fontSize: "14px", color: "#666" }}>✅ Viajes completados como conductor: {u.completed_trips || 0}</p>
+                          <p style={{ fontSize: "14px", color: "#666" }}>📊 Total viajes como conductor: {u.total_trips || 0}</p>
+                          {u.last_active && (
+                            <p style={{ fontSize: "14px", color: "#666" }}>🕐 Última actividad: {new Date(u.last_active).toLocaleString()}</p>
+                          )}
+                          {!u.is_active && <span style={{ color: "#f59e0b", fontWeight: "bold" }}>PENDIENTE DE APROBACIÓN</span>}
+                          {u.is_suspended && <span style={{ color: "#d93025", fontWeight: "bold" }}>SUSPENDIDO</span>}
+                        </div>
                       </div>
                       <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
                         {!u.is_active && (
                           <button className="btn btn-success" onClick={() => handleActivateDriver(u.id)}>Activar Conductor</button>
                         )}
+                        <button className="btn btn-secondary" onClick={() => { setPhotoDriver(u.id); setShowPhotoModal(true); }}>Foto</button>
                         <button className="btn btn-secondary" onClick={() => navigate(`/admin/user/${u.id}/trips`)}>Ver Viajes</button>
                         {u.is_suspended ? (
                           <button className="btn btn-success" onClick={() => handleAction("reactivate", u.id)}>Reactivar</button>
@@ -578,6 +617,51 @@ const AdminPanel = () => {
                   onClick={confirmActivateDriver}
                 >
                   Activar Conductor
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Modal para subir foto de conductor */}
+        {showPhotoModal && (
+          <div className="modal-overlay" onClick={() => { setShowPhotoModal(false); setSelectedPhoto(null); }}>
+            <div className="modal" onClick={e => e.stopPropagation()} style={{ maxWidth: "400px" }}>
+              <h2>Subir Foto de Conductor</h2>
+              <p style={{ color: "#666", marginBottom: "20px" }}>
+                Selecciona una foto para el perfil del conductor (JPG, PNG, WEBP - max 5MB)
+              </p>
+              <div className="form-group">
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/gif,image/webp"
+                  onChange={e => setSelectedPhoto(e.target.files[0])}
+                  style={{ padding: "12px", borderRadius: "8px", border: "1px solid #ddd", width: "100%" }}
+                />
+              </div>
+              {selectedPhoto && (
+                <div style={{ marginTop: "12px", textAlign: "center" }}>
+                  <img
+                    src={URL.createObjectURL(selectedPhoto)}
+                    alt="Preview"
+                    style={{ width: "120px", height: "120px", borderRadius: "50%", objectFit: "cover" }}
+                  />
+                  <p style={{ fontSize: "12px", color: "#666", marginTop: "4px" }}>{selectedPhoto.name}</p>
+                </div>
+              )}
+              <div className="btn-group" style={{ marginTop: "20px" }}>
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => { setShowPhotoModal(false); setSelectedPhoto(null); }}
+                >
+                  Cancelar
+                </button>
+                <button
+                  className="btn btn-primary"
+                  onClick={handleUploadPhoto}
+                  disabled={!selectedPhoto || uploadingPhoto}
+                >
+                  {uploadingPhoto ? "Subiendo..." : "Subir Foto"}
                 </button>
               </div>
             </div>

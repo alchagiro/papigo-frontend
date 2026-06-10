@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import { api } from "../store/authStore";
 import { joinDrivers, updateDriverLocation } from "../services/socket";
+import { API_URL } from "../config";
 import GoogleMapComponent from "../components/MapComponent";
+
+const serverUrl = API_URL.replace('/api', '');
 
 const DriverHome = () => {
   const { user, logout } = useAuthStore();
@@ -161,6 +164,9 @@ const DriverHome = () => {
         </div>
         <div className="header-actions">
           <span style={{ fontWeight: "600" }}>Hola, {user?.name}</span>
+          {profile?.photo_url && (
+            <img src={serverUrl + profile.photo_url} alt="Foto" style={{ width: "36px", height: "36px", borderRadius: "50%", objectFit: "cover" }} />
+          )}
           {ratingInfo && (
             <span style={{ fontSize: "14px", color: "#f9ab00", fontWeight: "600" }}>
               ★ {parseFloat(ratingInfo.average).toFixed(1)} ({ratingInfo.count} votos)

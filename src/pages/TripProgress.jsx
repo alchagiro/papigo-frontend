@@ -3,6 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 import { useTripStore } from "../store/tripStore";
 import { api } from "../store/authStore";
+import { API_URL } from "../config";
+
+const serverUrl = API_URL.replace('/api', '');
 import {
   joinTrip,
   onDriverPosition,
@@ -361,7 +364,17 @@ const TripProgress = () => {
               <p><strong>Recogida:</strong> {currentTrip.pickup_address}</p>
               <p><strong>Destino:</strong> {currentTrip.dropoff_address}</p>
               {currentTrip.passenger_name && <p><strong>Pasajero:</strong> {currentTrip.passenger_name}</p>}
-              {currentTrip.driver_name && <p><strong>Conductor:</strong> {currentTrip.driver_name}</p>}
+              {currentTrip.driver_name && (
+                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "4px" }}>
+                  {currentTrip.driver_photo_url && (
+                    <img src={serverUrl + currentTrip.driver_photo_url} alt="Conductor" style={{ width: "48px", height: "48px", borderRadius: "50%", objectFit: "cover" }} />
+                  )}
+                  <div>
+                    <p><strong>Conductor:</strong> {currentTrip.driver_name}</p>
+                    {currentTrip.driver_vehicle && <p style={{ fontSize: "14px", color: "#666" }}>Vehiculo: {currentTrip.driver_vehicle}</p>}
+                  </div>
+                </div>
+              )}
               {currentTrip.fare && <p><strong>Tarifa:</strong> {formatCOP(currentTrip.fare)}</p>}
               {currentTrip.distance && <p><strong>Distancia:</strong> {currentTrip.distance.toFixed(1)} km</p>}
               {currentTrip.duration && <p><strong>Duracion:</strong> ~{currentTrip.duration} min</p>}
