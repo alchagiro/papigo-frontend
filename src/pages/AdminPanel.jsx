@@ -12,7 +12,7 @@ const AdminPanel = () => {
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   
-  const [activeTab, setActiveTab] = useState("debts");
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [debts, setDebts] = useState([]);
   const [passengers, setPassengers] = useState([]);
   const [drivers, setDrivers] = useState([]);
@@ -51,7 +51,11 @@ const AdminPanel = () => {
     else if (activeTab === "passengers") fetchPassengers();
     else if (activeTab === "drivers") fetchDrivers();
     else if (activeTab === "bonuses") fetchPassengersForBonus();
-    else if (activeTab === "dashboard") fetchStats();
+    else if (activeTab === "dashboard") {
+      fetchStats();
+      const interval = setInterval(fetchStats, 30000);
+      return () => clearInterval(interval);
+    }
   }, [activeTab]);
 
   const fetchStats = async () => {
